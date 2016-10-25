@@ -9,7 +9,8 @@
       'ui.router',
       'myApp.config',
       'myApp.services',
-      'myApp.components.main'
+      'myApp.components.main',
+      'myApp.components.register'
     ]);
 
 })();
