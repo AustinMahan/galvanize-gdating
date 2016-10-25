@@ -1,0 +1,25 @@
+/* add custom styles */
+.home{
+  background-image: url("http://d3i6fh83elv35t.cloudfront.net/newshour/wp-content/uploads/2015/02/First-date-1024x682.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-top:
+}
+.home h1{
+  padding-top: 300px;
+  padding-bottom: 300px;
+}
+
+.carousel-caption{
+  color: black;
+  padding-bottom: 0px;
+}
+
+.item{
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 60px;
+  clear: both;
+}
