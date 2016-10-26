@@ -23,3 +23,16 @@
   padding-top: 60px;
   clear: both;
 }
+.registerForm{
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
+}
+
+.outline{
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+}

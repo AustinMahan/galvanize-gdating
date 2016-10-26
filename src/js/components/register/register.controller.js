@@ -8,10 +8,16 @@
 
   registerController.$inject = ['$scope', 'membersService'];
 
-  function registerController($scope) {
+  function registerController($scope, membersService) {
     /*jshint validthis: true */
-    this.greeting = 'hi there'
-    console.log('hit');
+    var vm = this;
+    vm.regForm = {}
+
+    vm.register = function () {
+      membersService.register(vm.regForm)
+      .then(console.log)
+      .catch(console.log)
+    }
   }
 
 })();

@@ -23,10 +23,19 @@
         controllerAs: 'registerCtrl',
         access: true
       }
+      var loginState = {
+        name: 'login',
+        url: '/login',
+        templateUrl: 'js/components/login/login.view.html',
+        controller: 'loginController',
+        controllerAs: 'loginCtrl',
+        access: true
+      }
       $urlRouterProvider.otherwise('/')
 
       $stateProvider.state(homeState)
       $stateProvider.state(registerState)
+      $stateProvider.state(loginState)
     }
 
 })();

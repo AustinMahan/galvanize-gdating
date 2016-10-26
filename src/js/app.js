@@ -10,7 +10,8 @@
       'myApp.config',
       'myApp.services',
       'myApp.components.main',
-      'myApp.components.register'
+      'myApp.components.register',
+      'myApp.components.login'
     ]);
 
 })();

@@ -1,0 +1,17 @@
+<h1>{{registerCtrl.greeting}}</h1>
+<form class="registerForm" ng-submit="loginCtrl.login(logForm)">
+  <div class="row">
+    <div class="formGroup col-md-6">
+      <label>Email</label>
+      <input type="text" ng-model="registerCtrl.regForm.email" class="form-control">
+    </div>
+
+    <div class="formGroup col-md-6">
+      <label>Password</label>
+      <input type="password" ng-model="registerCtrl.regForm.password" class="form-control">
+    </div>
+  </div>
+      <div class="col-md-12 formGroup row">
+        <button type="submit" class="form-control btn btn-primary">Register!</button>
+      </div>
+</form>
