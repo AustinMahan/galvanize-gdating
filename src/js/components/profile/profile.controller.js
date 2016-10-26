@@ -3,12 +3,12 @@
   'use strict';
 
   angular
-    .module('myApp.components.main', [])
-    .controller('mainController', mainController);
+    .module('myApp.components.profile', [])
+    .controller('profileController', profileController);
 
-  mainController.$inject = ['$rootScope', 'membersService'];
+  profileController.$inject = ['$rootScope', 'membersService'];
 
-  function mainController($rootScope, membersService) {
+  function profileController($rootScope, membersService) {
     /*jshint validthis: true */
     this.greeting = 'Hello World!';
     var vm = this

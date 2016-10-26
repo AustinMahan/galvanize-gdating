@@ -1,0 +1,82 @@
+<h1>Mambers</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="sideMembers col-md-5">
+      <div class="row">
+        <a ng-click="membersCtrl.filterBy = 'all'; membersCtrl.changeMems()">All</a>
+        <a ng-click="membersCtrl.filterBy = 'popular'; membersCtrl.changeMems()">Popular</a>
+        <a ng-click="membersCtrl.filterBy = 'near'; membersCtrl.changeMems()">Near Me</a>
+        <a ng-click="membersCtrl.filterBy = 'matches'; membersCtrl.changeMems()">My Matches</a>
+        <a ng-click="membersCtrl.filterBy = 'chat'; membersCtrl.changeMems()">Chatting</a>
+      </div>
+
+      <div class="row">
+        <new-member ng-repeat="mem in membersCtrl.curMembers | orderBy:membersCtrl.searchAge track by $index" member=mem  ng-click="membersCtrl.displayMember(mem);membersCtrl.itemClicked($index)"></new-member>
+      </div>
+
+      <div class="row">
+        <button type="button" ng-click="membersCtrl.firstPage()">First Page</button>
+        <button type="button" ng-click="membersCtrl.prevPage()">Previous Page</button>
+        <button type="button">{{membersCtrl.pages.curPage + 1}}</button>
+        <button type="button" ng-click="membersCtrl.nextPage()">Next Page</button>
+        <button type="button" ng-click="membersCtrl.lastPage()">Last Page</button>
+      </div>
+    </div>
+
+    <div class="col-md-7 text-center" ng-if="!membersCtrl.memDisplayed.search">
+      <img class="displayImg" src="{{membersCtrl.memDisplayed.avatar}}" alt="" />
+      <h2 class="displayUsername">{{membersCtrl.memDisplayed.username}}</h2>
+      <h3 class="displayName">{{membersCtrl.memDisplayed.names.firstName}} {{membersCtrl.memDisplayed.names.lastName}}</h3>
+      <p>
+        {{membersCtrl.memDisplayed.city}}
+      </p>
+      <p>
+        {{membersCtrl.memDisplayed.catchPhrase}}
+      </p>
+      <p>
+        {{membersCtrl.memDisplayed.description}}
+      </p>
+    </div>
+    <div class="col-md-7 " ng-if="membersCtrl.memDisplayed.search" ng-submit="membersCtrl.search()">
+      <form class="">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Username</label>
+            <input type="text" ng-model="membersCtrl.searchUsername" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <input type="text" ng-model="membersCtrl.searchEmail" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Gender</label>
+            <select ng-model="membersCtrl.searchGender" class="form-control">
+              <option value="0">Male</option>
+              <option value="1">Female</option>
+              <option value="2">Potato</option>
+              <option value="3">Tea Cup</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>Age</label>
+            <select ng-model="membersCtrl.searchAge" class="form-control">
+              <option value="-dob">Low to High</option>
+              <option value="dob">High to Low</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <ul>
+  <li paginate="mem in membersCtrl.members | itemsPerPage: 6">{{mem}}</li>
+</ul> -->
+
+<dir-pagination-controls></dir-pagination-controls>

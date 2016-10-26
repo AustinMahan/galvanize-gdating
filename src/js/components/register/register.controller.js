@@ -6,16 +6,20 @@
     .module('myApp.components.register', [])
     .controller('registerController', registerController);
 
-  registerController.$inject = ['$scope', 'membersService'];
+  registerController.$inject = ['membersService', '$location'];
 
-  function registerController($scope, membersService) {
+  function registerController(membersService, $location) {
     /*jshint validthis: true */
     var vm = this;
     vm.regForm = {}
 
     vm.register = function () {
       membersService.register(vm.regForm)
-      .then(console.log)
+      .then(data => {
+        localStorage.setItem('token', data.data.data.token)
+        localStorage.setItem('user', data.data.data.user._id)
+        $location.path('/members')
+      })
       .catch(console.log)
     }
   }

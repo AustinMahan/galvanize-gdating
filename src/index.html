@@ -11,9 +11,14 @@
     <!-- sample angular code -->
     <div class="container">
       <nav class="navbar navbar-default navbar-fixed-top row">
-        <div class="container">
+        <div class="container" ng-if="!user">
           <a href="/#/login"><button type="button" class="btn btn-default navbar-btn">Login</button></a>
           <a href="/#/register"><button type="button" class="btn btn-default navbar-btn">Register</button></a>
+        </div>
+        <div class="container" ng-if="user">
+          <a href="/#/members"><button type="button" class="btn btn-default navbar-btn" ng-click="$emit('search')">Search</button></a>
+          <a href="/#/profile"><button type="button" class="btn btn-default navbar-btn">My Profile</button></a>
+          <button type="button" class="btn btn-default navbar-btn" ng-click="$emit('logout')">Logout</button>
         </div>
       </nav>
       <br>
@@ -27,9 +32,13 @@
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/components/services.js"></script>
+    <script type="text/javascript" src="js/components/directives.js"></script>
+    <script type="text/javascript" src="js/components/filters.js"></script>
     <!-- main component -->
     <script type="text/javascript" src="js/components/main/main.controller.js"></script>
     <script type="text/javascript" src="js/components/register/register.controller.js"></script>
     <script type="text/javascript" src="js/components/login/login.controller.js"></script>
+    <script type="text/javascript" src="js/components/members/members.controller.js"></script>
+    <script type="text/javascript" src="js/components/profile/profile.controller.js"></script>
   </body>
 </html>

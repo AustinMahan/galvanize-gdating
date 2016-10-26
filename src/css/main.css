@@ -36,3 +36,29 @@
   border-radius: 20px;
   padding: 20px;
 }
+
+/*new-member *{
+  display: inline-block;
+}*/
+
+.username{
+  position: absolute;
+  top: 0px;
+  left: 135px;
+}
+
+.name{
+  position: absolute;
+  left: 135px;
+  top: 40px;
+}
+
+.active{
+  background-color: lightgrey;
+}
+
+.memberDiv{
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

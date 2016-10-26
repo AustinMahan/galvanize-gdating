@@ -1,0 +1,9 @@
+<!-- {{vm.member}} -->
+<div class="memberDiv" ng-class="{ active: !vm.member.active }">
+  <img src="{{vm.member.avatar}}" alt="Image not found" onerror="this.src='http://placeholder.cn/128';" />
+  <h2 class="username">{{vm.member.username}}</h2>
+  <h3 class="name">{{vm.member.names.firstName}} {{vm.member.names.lastName}}</h3>
+  <p class="description">
+    {{vm.member.description}}
+  </p>
+</div>
