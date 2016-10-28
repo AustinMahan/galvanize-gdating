@@ -11,7 +11,16 @@
       <input type="password" ng-model="loginCtrl.logForm.password" class="form-control">
     </div>
   </div>
-      <div class="col-md-12 formGroup row">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-control text-center error" ng-if="loginCtrl.error">
+        Error Logging in
+      </div>
+    </div>
+  </div>
+    <div class="formGroup row">
+      <div class="col-md-12">
         <button type="submit" class="form-control btn btn-primary">Register!</button>
       </div>
+    </div>
 </form>

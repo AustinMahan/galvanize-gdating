@@ -4,7 +4,8 @@
 
   angular
     .module('myApp.config', [])
-    .config(appConfig);
+    .config(appConfig)
+    .run(routeStart)
 
     function appConfig($stateProvider, $urlRouterProvider) {
       var homeState = {
@@ -37,7 +38,7 @@
         templateUrl: 'js/components/members/members.view.html',
         controller: 'membersController',
         controllerAs: 'membersCtrl',
-        access: true
+        access: false
       }
       var profileState = {
         name: 'profile',
@@ -45,7 +46,7 @@
         templateUrl: 'js/components/profile/profile.view.html',
         controller: 'profileController',
         controllerAs: 'profileCtrl',
-        access: true
+        access: false
       }
       $urlRouterProvider.otherwise('/')
 
@@ -57,3 +58,11 @@
     }
 
 })();
+
+function routeStart($rootScope, $location) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    if(!toState.access && !localStorage.getItem('token')) {
+      $location.path('/')
+    }
+  })
+}

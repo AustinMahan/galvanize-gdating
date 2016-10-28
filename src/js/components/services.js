@@ -3,14 +3,50 @@
   angular
   .module('myApp.services', [])
   .service('membersService', membersService)
+  .service('socketService', socketService)
 
-  membersService.$inject = ['$http', '$rootScope', '$q']
+  socketService.$inject = ['$http', '$rootScope']
 
-  function membersService($http, $rootScope, $q) {
+  function socketService($http, $rootScope) {
+    var vm = this
+    var socket = io('http://galvanize-student-apis.herokuapp.com/');
+    socket.on('gdating.messages', function (data) {
+      if (data._members.indexOf($rootScope.user._id) > -1) {
+        $rootScope.user.chatting = [data]
+      }
+      vm.getChats($rootScope.user._id)
+      .then(data => {
+         data.data.data.forEach(item => {
+          if (item._members.indexOf($rootScope.chatMember) > -1 && item._members.indexOf($rootScope.chatMember) > -1) {
+            $rootScope.$emit('newChat', item.messages)
+          }
+        })
+      })
+    });
+
+    vm.sendMessage = function (text, memberId, id) {
+      var payload = {
+        _recipient: memberId,
+        content: text
+      }
+      return $http.post('https://galvanize-student-apis.herokuapp.com/gdating/members/' + id + '/conversations', payload)
+    }
+
+    vm.getChats = function (id) {
+      return $http.get('https://galvanize-student-apis.herokuapp.com/gdating/members/' + id + '/conversations')
+    }
+  }
+
+
+
+  membersService.$inject = ['$http', '$rootScope', '$q', '$location']
+
+  function membersService($http, $rootScope, $q, $location) {
     $rootScope.$on('logout', function (event) {
       localStorage.removeItem('user')
       localStorage.removeItem('token')
       $rootScope.user = ''
+      $location.path('/')
     })
     this.getAll = function () {
       return $http.get('http://galvanize-student-apis.herokuapp.com/gdating/members')
@@ -25,6 +61,29 @@
         data.data.data.user.chatting = things.data.data
         return data
       })
+    }
+
+    this.edit = function (data, id) {
+      var payload = {
+        username: data.username || $rootScope.user.username,
+        address:{
+          geo: {
+          lat: data.address.geo.lat || 100,
+          lng: data.address.geo.lng || 50
+          }
+        },
+        dob: data.dob || $rootScope.user.dob,
+        password: data.password || $rootScope.user.password,
+        names: {
+          firstName: data.names.firstName || $rootScope.user.names.firstName,
+          lastName: data.names.lastName || $rootScope.user.names.lastName
+        },
+        city: data.city || $rootScope.user.city,
+        description: data.description || $rootScope.user.description,
+        email: data.email || $rootScope.user.email,
+        phone: data.phone || $rootScope.user.phone,
+      }
+      return $http.put('https://galvanize-student-apis.herokuapp.com/gdating/members/' + id, payload)
     }
 
     this.sort = function (arr, str) {
@@ -48,7 +107,14 @@
           return $q.resolve(arr.filter(person => person._matches.length > 4));
           break;
         case 'chat':
-          return $q.resolve(arr);
+          var $user = $rootScope.user
+          var stuff = $user.chatting.map(convo => convo._members.filter(user => user !== $user._id))
+          .reduce((a, b) => a.concat(b), [])
+          .map(id => {
+            return $http.get('https://galvanize-student-apis.herokuapp.com/gdating/members/' + id)
+            .then(data => data.data.data)
+          })
+          return $q.all(stuff);
           break;
         case 'search':
           return $q.resolve(arr);

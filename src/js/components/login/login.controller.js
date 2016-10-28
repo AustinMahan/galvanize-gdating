@@ -6,9 +6,9 @@
     .module('myApp.components.login', [])
     .controller('loginController', loginController);
 
-  loginController.$inject = ['membersService', '$location', '$rootScope'];
+  loginController.$inject = ['membersService', '$location', '$rootScope', '$timeout'];
 
-  function loginController(membersService, $location, $rootScope) {
+  function loginController(membersService, $location, $rootScope, $timeout) {
     /*jshint validthis: true */
     var vm = this;
     vm.logForm = {}
@@ -19,11 +19,16 @@
       .then(data => {
         $rootScope.user = data.data.data.user
         localStorage.setItem('token', data.data.data.token)
-        console.log(data.data.data);
         localStorage.setItem('user', data.data.data.user._id)
         $location.path('/members')
       })
-      .catch(console.log)
+      .catch(data => {
+        console.log(data);
+        vm.error = true
+        $timeout(function () {
+          vm.error = false
+        }, 5000)
+      })
     }
   }
 

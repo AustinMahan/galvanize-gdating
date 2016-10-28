@@ -6,9 +6,9 @@
     .module('myApp.components.register', [])
     .controller('registerController', registerController);
 
-  registerController.$inject = ['membersService', '$location'];
+  registerController.$inject = ['membersService', '$location', '$timeout'];
 
-  function registerController(membersService, $location) {
+  function registerController(membersService, $location, $timeout) {
     /*jshint validthis: true */
     var vm = this;
     vm.regForm = {}
@@ -20,7 +20,13 @@
         localStorage.setItem('user', data.data.data.user._id)
         $location.path('/members')
       })
-      .catch(console.log)
+      .catch(data => {
+        console.log(data);
+        vm.error = true
+        $timeout(function () {
+          vm.error = false
+        }, 5000)
+      })
     }
   }
 

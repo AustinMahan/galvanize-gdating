@@ -16,6 +16,17 @@
   padding-bottom: 0px;
 }
 
+.editProfile{
+  padding: 20px;
+}
+
+.success{
+  background-color: limegreen;
+}
+.error {
+  background-color: red;
+}
+
 .item{
   width: 75%;
   margin-left: auto;
@@ -61,4 +72,30 @@
   position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.editProfile{
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.memberDisplayed{
+  height: 90vh;
+}
+.chat{
+  height: 70vh;
+  position: relative;
+  overflow: scroll;
+}
+.chat .chatForm{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.right{
+  float: right;
+  padding-right: 50px;
+}
+.left{
+  left: 10px;
 }

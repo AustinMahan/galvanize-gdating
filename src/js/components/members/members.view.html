@@ -10,7 +10,6 @@
         <a ng-click="membersCtrl.filterBy = 'matches'; membersCtrl.changeMems()">My Matches</a>
         <a ng-click="membersCtrl.filterBy = 'chat'; membersCtrl.changeMems()">Chatting</a>
       </div>
-
       <div class="row">
         <new-member ng-repeat="mem in membersCtrl.curMembers | orderBy:membersCtrl.searchAge track by $index" member=mem  ng-click="membersCtrl.displayMember(mem);membersCtrl.itemClicked($index)"></new-member>
       </div>
@@ -24,7 +23,7 @@
       </div>
     </div>
 
-    <div class="col-md-7 text-center" ng-if="!membersCtrl.memDisplayed.search">
+    <div class="col-md-7 text-center memberDisplayed" ng-if="!membersCtrl.memDisplayed.search">
       <img class="displayImg" src="{{membersCtrl.memDisplayed.avatar}}" alt="" />
       <h2 class="displayUsername">{{membersCtrl.memDisplayed.username}}</h2>
       <h3 class="displayName">{{membersCtrl.memDisplayed.names.firstName}} {{membersCtrl.memDisplayed.names.lastName}}</h3>
@@ -37,7 +36,24 @@
       <p>
         {{membersCtrl.memDisplayed.description}}
       </p>
+      <div class="chat row">
+        <div class="row" ng-repeat="message in membersCtrl.thisChat" >
+          <div ng-class="{right: message._sender == user._id, left: message._sender !== user._id}">
+            <p>
+              {{message.content}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <form class="row" ng-submit="membersCtrl.addMessage(membersCtrl.chatMessage, membersCtrl.memDisplayed._id)">
+        <div class="chatForm">
+          <input type="text" ng-model="membersCtrl.chatMessage" class="col-md-10">
+          <button type="submit" class="col-md-2">Send</button>
+        </div>
+      </form>
     </div>
+
     <div class="col-md-7 " ng-if="membersCtrl.memDisplayed.search" ng-submit="membersCtrl.search()">
       <form class="">
         <div class="row">

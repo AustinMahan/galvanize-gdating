@@ -1,1 +1,133 @@
-{{user}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        Edit profile
+      </p>
+      <div class="editProfile">
+        <form class="" ng-submit="profileCtrl.editForm()">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Username</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.username" ng-value="user.username">
+            </div>
+            <div class="col-md-6">
+              <label>Avatar</label>
+              <input type="url" class="form-control" ng-model="profileCtrl.form.avatar" ng-value="user.avatar">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>First Name</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.names.firstName" ng-value="user.names.firstName">
+            </div>
+            <div class="col-md-6">
+              <label>Last Name</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.names.lastName" ng-value="user.names.lastName">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Description</label>
+              <textarea ng-model="profileCtrl.form.description" class="form-control" value="{{user.description}}"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Email</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.email" ng-value="user.email">
+            </div>
+            <div class="col-md-6">
+              <label>Password</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.password" ng-value="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Date of Birth</label>
+              <input type="date" class="form-control" ng-model="profileCtrl.form.dob" ng-value="">
+            </div>
+            <div class="col-md-6">
+              <label>Phone</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.phone" ng-value="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Zip</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.address.zip" ng-value="user.address.zip">
+            </div>
+            <div class="col-md-3">
+              <label>Lat</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.address.geo.lat" ng-value="user.address.geo.lat">
+            </div>
+            <div class="col-md-3">
+              <label>Lng</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.address.geo.lng" ng-value="user.address.geo.lng">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>City</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.address.city" ng-value="user.address.city">
+            </div>
+            <div class="col-md-6">
+              <label>Street</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.address.street" ng-value="user.address.street">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Website</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.website" ng-value="user.website">
+            </div>
+            <div class="col-md-6">
+              <label>Company Name</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.company.name" ng-value="user.company.name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Company BS</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.company.bs" ng-value="user.company.bs">
+            </div>
+            <div class="col-md-6">
+              <label>Company Catch Phrase</label>
+              <input type="text" class="form-control" ng-model="profileCtrl.form.company.phrase" ng-value="user.company.phrase">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Gender</label>
+              <select ng-model="profile.form.gender">
+                <option ng-value="0">Male</option>
+                <option ng-value="1">Female</option>
+                <option ng-value="2">Potato</option>
+                <option ng-value="3">Tea Cup</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" name="button">Edit</button>
+
+          <div class="form-control text-center success" ng-if="profileCtrl.success">
+            Success
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img class="displayImg" ng-src="{{profileCtrl.form.avatar || user.avatar}}" alt="" />
+      <h2 class="">{{profileCtrl.form.username || user.username}}</h2>
+      <h3 class="">{{profileCtrl.form.names.firstName || user.names.firstName}} {{profileCtrl.form.names.lastName || user.names.lastName}}</h3>
+      <p>
+        {{profileCtrl.form.city || user.city}}
+      </p>
+      <p>
+        {{profileCtrl.form.catchPhrase || user.catchPhrase}}
+      </p>
+      <p>
+        {{profileCtrl.form.description || user.description}}
+      </p>
+    </div>
+  </div>
+</div>
