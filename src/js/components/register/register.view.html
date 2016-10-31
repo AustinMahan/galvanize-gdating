@@ -1,14 +1,18 @@
 <h1>{{registerCtrl.greeting}}</h1>
-<form class="registerForm" ng-submit="registerCtrl.register(regForm)">
+<form class="registerForm" ng-submit="registerCtrl.register(regForm)" name="registerForm" novalidate>
   <div class="row">
     <div class="formGroup col-md-6">
-      <label>Username</label>
-      <input type="text" ng-model="registerCtrl.regForm.username" class="form-control">
+      <label>Username*</label>
+      <input type="text" ng-model="registerCtrl.regForm.username" class="form-control" required>
     </div>
 
-    <div class="formGroup col-md-6">
-      <label>Password</label>
-      <input type="password" ng-model="registerCtrl.regForm.password" class="form-control">
+    <div class="formGroup col-md-3">
+      <label>Password*</label>
+      <input type="password" ng-model="registerCtrl.regForm.password" class="form-control" required>
+    </div>
+    <div class="formGroup col-md-3">
+      <label>Confirm Password*</label>
+      <input type="password" ng-model="registerCtrl.regForm.confPassword" class="form-control" required>
     </div>
   </div>
   <div class="outline">
@@ -17,8 +21,8 @@
     </p>
     <div class="row">
       <div class="formGroup col-md-6">
-        <label>First Name</label>
-        <input type="text" ng-model="registerCtrl.regForm.firstName" class="form-control">
+        <label>First Name*</label>
+        <input type="text" ng-model="registerCtrl.regForm.firstName" class="form-control" required>
       </div>
 
       <div class="formGroup col-md-6">
@@ -28,13 +32,13 @@
     </div>
     <div class="row">
       <div class="formGroup col-md-6">
-        <label>Email</label>
-        <input type="text" ng-model="registerCtrl.regForm.email" class="form-control">
+        <label>Email*</label>
+        <input type="text" ng-model="registerCtrl.regForm.email" class="form-control" required>
       </div>
 
       <div class="formGroup col-md-6">
-        <label>Phone</label>
-        <input type="number" ng-model="registerCtrl.regForm.phone" class="form-control">
+        <label>Phone*</label>
+        <input type="number" ng-model="registerCtrl.regForm.phone" class="form-control" required>
       </div>
     </div>
 
@@ -47,10 +51,12 @@
 
     <div class="row">
       <div class="formGroup col-md-6">
-        <label>Gender</label>
+        <label>Gender*</label>
         <br>
-        <label>Male</label><input type="radio" name="gender" ng-model="registerCtrl.regForm.gender" value="1">
-        <label>Female</label><input type="radio" name="gender" ng-model="registerCtrl.regForm.gender" value="2">
+        <label>Male</label><input type="radio" name="gender" ng-model="registerCtrl.regForm.gender" value="0">
+        <label>Female</label><input type="radio" name="gender" ng-model="registerCtrl.regForm.gender" value="1">
+        <label>Potato</label><input type="radio" name="gender" ng-model="registerCtrl.regForm.gender" value="2" checked>
+        <label>Tea Cup</label><input type="radio" name="gender" ng-model="registerCtrl.regForm.gender" value="3">
       </div>
 
       <div class="formGroup col-md-6">
@@ -59,13 +65,13 @@
       </div>
       <div class="formGroup col-md-6">
         <label>Date Of Birth</label>
-        <input type="date" ng-model="registerCtrl.regForm.dob" class="form-control">
+        <input type="date" ng-model="registerCtrl.regForm.dob" class="form-control" required>
       </div>
       <div class="form-control text-center error" ng-if="loginCtrl.error">
         Error Logging in
       </div>
       <div class="col-md-12 formGroup row">
-        <button type="submit" class="form-control btn btn-primary">Register!</button>
+        <button type="submit" ng-disabled="registerForm.$invalid || registerCtrl.regForm.confPassword !== registerCtrl.regForm.password" class="form-control btn btn-primary">Register!</button>
       </div>
     </div>
 

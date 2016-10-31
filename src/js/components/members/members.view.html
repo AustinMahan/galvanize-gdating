@@ -1,4 +1,3 @@
-<h1>Mambers</h1>
 
 <div class="container">
   <div class="row">
@@ -37,8 +36,8 @@
         {{membersCtrl.memDisplayed.description}}
       </p>
       <div class="chat row">
-        <div class="row" ng-repeat="message in membersCtrl.thisChat" >
-          <div ng-class="{right: message._sender == user._id, left: message._sender !== user._id}">
+        <div class="row" ng-repeat="message in membersCtrl.thisChat track by $index" >
+          <div id="{{$index}}" ng-class="{right: message._sender == user._id, left: message._sender !== user._id}">
             <p>
               {{message.content}}
             </p>

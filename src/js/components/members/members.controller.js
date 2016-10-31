@@ -6,9 +6,9 @@
     .module('myApp.components.members', [])
     .controller('membersController', membersController);
 
-  membersController.$inject = ['$rootScope', 'membersService', 'socketService'];
+  membersController.$inject = ['$rootScope', 'membersService', 'socketService', '$location', '$anchorScroll'];
 
-  function membersController($rootScope, membersService, socketService) {
+  function membersController($rootScope, membersService, socketService, $location, $anchorScroll) {
     /*jshint validthis: true */
     var vm = this;
     vm.filterBy = 'all'
@@ -24,6 +24,7 @@
     })
     $rootScope.$on('newChat', function (event, data) {
       vm.thisChat = data
+      vm.scrollTo(data.length - 1)
     })
     $rootScope.$on('search', function(event) {
       vm.memDisplayed = {search: true}
@@ -33,6 +34,11 @@
       socketService.getChats($rootScope.user._id)
       .then(data => $rootScope.user.chatting = data.data.data)
     })
+
+    vm.scrollTo = function(id) {
+      $location.hash(id);
+      $anchorScroll();
+   }
 
     vm.searchUsername = ''
     vm.searchEmail = ''
@@ -52,8 +58,8 @@
         return item._members.indexOf($rootScope.user._id) > -1 && item._members.indexOf(member._id) > -1
       })
       if (vm.thisChat.length) vm.thisChat = vm.thisChat[0].messages
-      angular.element(vm).css('background-color', 'lightgrey');
       vm.memDisplayed = member
+      $('.chat').scrollTop(99999)
     }
 
     vm.addMessage = function (text, memberId) {
@@ -62,6 +68,7 @@
       .then(() => {
         socketService.getChats($rootScope.user._id)
         .then(data => $rootScope.user.chatting = data.data.data)
+        .then(() => $('.chat').scrollTop(99999))
       })
       .catch(console.log)
     }
@@ -113,5 +120,10 @@
       })
     }
   }
+//
+// setInterval(function () {
+//   $('.chat').scrollTop(99999)
+// }, 2500)
+
 
 })();

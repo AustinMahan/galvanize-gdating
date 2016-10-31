@@ -22,6 +22,7 @@
           }
         })
       })
+      .then(() => $('.chat').scrollTop(99999))
     });
 
     vm.sendMessage = function (text, memberId, id) {
@@ -92,7 +93,10 @@
           return $q.resolve($rootScope.members);
           break;
         case 'near':
-          return $q.resolve(arr);
+          var thing = $rootScope.members.filter(member => {
+            return Math.abs(member.address.geo.lat - $rootScope.user.address.geo.lat) < 3 && Math.abs(member.address.geo.lng - $rootScope.user.address.geo.lng) < 3
+          })
+          return $q.resolve(thing);
           break;
         case 'matches':
           var members = []
@@ -104,7 +108,7 @@
           // return Promise.all(promise).then(data => console.log(data));
           break;
         case 'popular':
-          return $q.resolve(arr.filter(person => person._matches.length > 4));
+          return $q.resolve($rootScope.members.filter(person => person._matches.length > 4));
           break;
         case 'chat':
           var $user = $rootScope.user

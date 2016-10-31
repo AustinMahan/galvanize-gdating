@@ -1,10 +1,19 @@
 /* add custom styles */
+.view{
+  margin-top: 70px;
+}
+.left.carousel-control{
+  width: 10%;
+}
+.right.carousel-control{
+  width: 10%;
+}
 .home{
   background-image: url("http://d3i6fh83elv35t.cloudfront.net/newshour/wp-content/uploads/2015/02/First-date-1024x682.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  padding-top:
+  color: lightgrey;
 }
 .home h1{
   padding-top: 300px;
@@ -93,9 +102,24 @@
   right: 20px;
 }
 .right{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   float: right;
-  padding-right: 50px;
+  margin-right: 60px;
+  width: 50%;
+  background-color: lightblue;
+  border-radius: 20px;
 }
 .left{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-left: 60px;
+  width: 50%;
   left: 10px;
+  background-color: lightgrey;
+  border-radius: 20px;
 }
